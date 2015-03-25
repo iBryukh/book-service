@@ -4,7 +4,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>service.Greetings</param-value>
+            <param-value>service.BooksApi</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
