@@ -16,7 +16,6 @@ public class Profile {
 
 
 	@Id String userId;
-    
     public Profile (String userId, String displayName, String mainEmail) {
     	this.userId = userId;
     	this.displayName = displayName;

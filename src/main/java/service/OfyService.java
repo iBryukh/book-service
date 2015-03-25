@@ -9,7 +9,7 @@ public class OfyService {
 
     static {
         factory().register(Profile.class);
-        //factory().register(Conference.class);
+        factory().register(Book.class);
     }
 
     public static Objectify ofy() {

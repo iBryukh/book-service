@@ -5,6 +5,7 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.response.NotFoundException;
 import com.google.api.server.spi.response.UnauthorizedException;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
@@ -66,6 +67,20 @@ public class BooksApi {
         Key<Profile> key = Key.create(Profile.class,userId);
         Profile profile = ofy().load().key(key).now();
         return profile;
+    }
+    
+    @ApiMethod(name = "addBook", path = "book", httpMethod = HttpMethod.POST)
+    public Book addBook(final BookForm bookForm) {
+    	Book book = new Book (bookForm);
+    	ofy().save().entity(book).now();
+    	return book;
+    }
+
+    @ApiMethod(name = "getBook", path = "book", httpMethod = HttpMethod.GET)
+    public Book getBook(@Named("websafeBookKey") final String websafeBookKey) {
+    	Key<Book> key = Key.create(websafeBookKey);
+        Book book = ofy().load().key(key).now();
+    	return book;
     }
     
     private Objectify ofy() {
