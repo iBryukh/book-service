@@ -5,9 +5,11 @@
 document.title = "some title";
 
 function on_load(){
+    /*
     var array = getJsonFromUrl();
     for(var key in array){
         alert(array[key]);
     }
+    */
 }
 

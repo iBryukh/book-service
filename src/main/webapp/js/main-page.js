@@ -6,7 +6,7 @@ var books_array = [];
 books_array.push({
     author: 'Author Name 1',
     title: 'The Story Name',
-    cover: 'resources/cover.jpg',
+    cover: 'resources/cover2.jpg',
     likes: 120,
     dislikes: 10,
     book_id: 'sbrtd5hs6qsbr64'
@@ -41,6 +41,7 @@ function book_cover(index){
     var a = document.createElement('a');
     a.href = "book.html?id="+books_array[index]['book_id'];
     a.innerHTML = "<img class='book-cover' src='" + books_array[index]['cover'] + "' />";
+
     return a;
 }
 

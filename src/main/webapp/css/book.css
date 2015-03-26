@@ -1,0 +1,31 @@
+#about-book-container{
+    margin-top: 80px;
+}
+
+.book{
+    padding-top: 50px;
+    width: inherit;
+    height: 500px;
+}
+.book-cover{
+    position: absolute;
+}
+.book-cover img {
+    width: 280px;
+    height: 400px;
+}
+.about-book{
+    margin-left: 400px;
+    font-family: Jura;
+}
+.author-name{
+    font-size: 30px;
+}
+.story-name{
+    font-size: 20px;
+}
+
+.annotations{
+    margin-top: 40px;
+    font-size: 15px;
+}
