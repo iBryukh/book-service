@@ -77,15 +77,58 @@ public class BooksApi {
     }
 
     @ApiMethod(name = "getBook", path = "book", httpMethod = HttpMethod.GET)
-    public Book getBook(@Named("websafeBookKey") final String websafeBookKey) {
+    public Book getBook(final User user, @Named("websafeBookKey") final String websafeBookKey) {
     	Key<Book> key = Key.create(websafeBookKey);
         Book book = ofy().load().key(key).now();
+        int liked = 0; 
+        if (user != null) 
+        {
+        	Profile profile = getProfileFromUser(user);
+        	if (profile.getLiked().contains(websafeBookKey)) {
+        		liked = 1;
+        	} else if (profile.getDisliked().contains(websafeBookKey)) {
+        		liked = -1;
+        	}
+        }    
+        book.setLiked(liked);
     	return book;
     }
     
-    private Objectify ofy() {
+    @ApiMethod(name = "likeBook", path = "book/{websafeBookKey}/like", httpMethod = HttpMethod.POST)
+    public Profile likeBook(final User user, @Named("websafeBookKey") final String websafeBookKey) throws UnauthorizedException {
+        if (user == null) {
+            throw new UnauthorizedException("Authorization required");
+        }
+        Profile profile = getProfileFromUser(user);
+        Book book = getBook(user, websafeBookKey);
+        profile.likeBook(book);
+        ofy().save().entities(profile, book).now();
+        return profile;
+    }
+    
+    @ApiMethod(name = "dislikeBook", path = "book/{websafeBookKey}/dislike", httpMethod = HttpMethod.POST)
+    public Profile dislikeBook(final User user, @Named("websafeBookKey") final String websafeBookKey) throws UnauthorizedException {
+        if (user == null) {
+            throw new UnauthorizedException("Authorization required");
+        }
+        Profile profile = getProfileFromUser(user);
+        Book book = getBook(user, websafeBookKey);
+        profile.dislikeBook(book);
+        ofy().save().entities(profile, book).now();
+        return profile;
+    }
+    
+    private static Objectify ofy() {
     	return OfyService.ofy();
     }
 	
+    private static Profile getProfileFromUser(User user) {
+        Profile profile = ofy().load().key(Key.create(Profile.class, user.getUserId())).now();
+        if (profile == null) {
+            String email = user.getEmail();
+            profile = new Profile(user.getUserId(),extractDefaultDisplayNameFromEmail(email), email);
+        }
+        return profile;
+    }
 	
 }
