@@ -1,7 +1,6 @@
 body{
-    background: #343d46;
+    /*background: #343d46;*/
 }
-
 .navbar{
     margin-bottom: 0px;
     border: 0px;
@@ -32,14 +31,12 @@ a#exit{
 input#search{
     margin-top: 4px;
     height: 25px;
-    width: 250px;
+    width: 200px;
+    margin-right: 40px;
     background-color: transparent;
     border-width: 0px 0px 1px 0px;
-    border-color: darkred;
+    border-color: #ffffff;
     outline:0;
     font-family: Jura;
-}
-
-input#search:hover{
-    border-color: #ffffff;
+    color: #ffffff;
 }
