@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Book Service</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/fonts.css" rel="stylesheet" />
+    <link href="css/general.css" rel="stylesheet" />
+    <link href="css/book.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/book.js"></script>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body onload="on_load()">
+<nav class="navbar navbar-default navbar-static-top header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logotype" href="index.html">Book Service</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" id="exit">Exit</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" id="search" placeholder="Search...">
+            </form>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div id="about-book-container" class="container">
+    <div class="book">
+        <span class="book-cover">
+            <img src="resources/cover2.jpg" />
+        </span>
+        <div class="about-book">
+            <p class="author-name">Author Name</p>
+            <p class="story-name">The Title of The Story</p>
+            <i class='fa fa-thumbs-up fa-2x'></i>120
+            <i class='fa fa-thumbs-down fa-2x'></i>10
+            <div class="annotations">
+                I'm Beth. I've read Harry Potter every year since it's come out. It's long been a goal of mine to buy paperbacks so I can write in them and not ruin my nice hardback copies.
+
+                This is where I come to spazz about Harry Potter. All the book text belongs to JK Rowling. All the notes/questions/insights are mine.
+
+                *Please note that I have a complete set of hardbacks I haven't written in, and that I bought a set of paperbacks for this purpose before you yell at me for writing in the books. Thank you. Everyone who has reblogged one of my posts to comment about how awful it is to write in books has missed the point of this blog.*
+
+                “Print will never die. There’s no substitute for the feel of an actual book. I adore physically turning pages, and being able to underline passages and not worrying about dropping them in the bath or running out of power. I also find print books objects of beauty.” ~JK Rowling
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
