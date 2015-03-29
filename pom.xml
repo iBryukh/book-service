@@ -20,6 +20,26 @@
     <dependencies>
         <!-- Compile/runtime dependencies -->
         <dependency>
+  			<groupId>com.dropbox.core</groupId>
+  			<artifactId>dropbox-core-sdk</artifactId>
+  			<version>1.7.7</version>
+		</dependency>
+        <dependency>
+          <groupId>com.google.api-client</groupId>
+          <artifactId>google-api-client</artifactId>
+          <version>1.19.1</version>
+        </dependency>
+        <dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client-jetty</artifactId>
+			<version>1.11.0-beta</version>
+		</dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-drive</artifactId>
+            <version>v2-rev163-1.20.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-1.0-sdk</artifactId>
             <version>1.9.4</version>

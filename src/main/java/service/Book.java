@@ -1,12 +1,25 @@
 package service;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import service.BooksApi.Message;
+
+import com.dropbox.core.DbxClient;
+import com.dropbox.core.DbxEntry;
+import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.DbxWriteMode;
+import com.google.api.client.util.Base64;
+import com.google.api.server.spi.config.ApiMethod;
+import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.condition.IfNotZero;
 
 @Cache
 @Entity
@@ -17,12 +30,14 @@ public class Book {
 	private String title;
 	private String author;
 	private int year;
+	@Index (IfNotZero.class)
 	private int likes;
 	private int dislikes;
 	private List<String> genre = new ArrayList<String>(0);
 	private List<String> quotes = new ArrayList<String>(0);
 	private List<String> tags = new ArrayList<String>(0);
 	private String annotation;
+	private String image;
 	private int userlike;
 	
 	private Book(){}
@@ -40,6 +55,15 @@ public class Book {
 		if (bookForm.getTags()!=null)this.tags = bookForm.getTags();
 		if (bookForm.getAnnotation()!=null)this.annotation = bookForm.getAnnotation();
 		else this.annotation = "";
+		if (bookForm.getImage()!=null) {
+			try {
+				this.image = saveImage(bookForm.getImage(), title);
+			} catch (Exception e) {
+				this.image = "";
+			}
+		} else {
+			this.image = "";
+		}
 	}
 	public String getTitle() {
 		return title;
@@ -87,6 +111,36 @@ public class Book {
 	public void dislike (Boolean bool) {
 		dislikes++;
 		if (bool) likes--;
+	}
+	public String getImage() {
+		return image;
+	}
+
+	private static String saveImage(String image, String title) throws Exception {
+
+		DbxRequestConfig dbxRequestConfig = new DbxRequestConfig(
+				"BooksService/1.0", Locale.getDefault().toString(), NoHttpsRequestor.Instance);
+		
+		String authAccessToken = "dANzZIkRsdAAAAAAAAAABzJy0QNIL0ZlVdUVwjdJBMl3_wD5TNfxcjNWwLVKLsdI";
+		DbxClient dbxClient = new DbxClient(dbxRequestConfig, authAccessToken);
+		String[] split = image.split(";base64,");
+		String type = split[0];
+		type = type.split("/")[1];
+		image = split[1];
+		String fileName = "cover."+type;
+		byte[] bytes = Base64.decodeBase64(image);
+		ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+		String sharedUrl;
+		try {
+			DbxEntry.File uploadedFile = dbxClient.uploadFile("/covers/" + title + "/" + fileName,
+					DbxWriteMode.add(), bytes.length, bis);
+			//sharedUrl = dbxClient.createShareableUrl(uploadedFile.path + uploadedFile.name);
+			sharedUrl = dbxClient.createShareableUrl(uploadedFile.path);
+		} finally {
+			bis.close();
+		}
+		
+		return sharedUrl;
 	}
 	
 }

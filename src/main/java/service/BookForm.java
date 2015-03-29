@@ -12,9 +12,13 @@ public class BookForm {
 	private List<String> quotes;
 	private List<String> tags;
 	private String annotation;
+	private String image;
 	
 	private BookForm(){}
 	
+	public String getImage() {
+		return image;
+	}
 	public String getTitle() {
 		return title;
 	}
