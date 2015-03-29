@@ -1,0 +1,70 @@
+a:hover, a:visited, a:link, a:active{
+    text-decoration: none;
+}
+.row {
+    margin-bottom: 20px;
+}
+.books-container{
+    padding-bottom: 100px;
+}
+.book-cover{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+.one-book{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.cover-container {
+    text-align: center;
+}
+
+.one-book p{
+    font-family: Jura;
+    color:#000000;
+}
+.one-book p.author{
+     font-size: 20px;
+}
+.one-book p.story-name{
+    font-size: 15px;
+}
+
+.mark{
+    color: #000000;
+    background-color: inherit;
+    font-family: Jura;
+}
+
+.mark i{
+    font-style: normal;
+}
+
+/*992px is the size when bootstrap class col-md-4 makes it's resize*/
+@media (max-width: 992px) {
+    /*
+    .one-book div{
+        display: inline;
+    }
+    .cover-container {
+        text-align: left;
+        height: 200px;
+        width: 200px;
+    }
+    .mark{
+        width: 200px;
+    }
+    .mark p{
+        width: inherit;
+    }
+    .book-info {
+    }
+    */
+}
+/*when screen has width less then 500px there is no space for text from the left size of picture*/
+@media (max-width: 500px) {
+    .cover-container{
+        text-align: center;
+    }
+}
