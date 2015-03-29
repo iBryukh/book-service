@@ -69,6 +69,11 @@ public class BooksApi {
         return profile;
     }
     
+    @ApiMethod(name = "message", path = "message", httpMethod = HttpMethod.GET)
+    public Message message() {
+    	return new Message("1", "2", "3");
+    }
+    
     @ApiMethod(name = "addBook", path = "book", httpMethod = HttpMethod.POST)
     public Book addBook(final BookForm bookForm) {
     	Book book = new Book (bookForm);
@@ -129,6 +134,28 @@ public class BooksApi {
             profile = new Profile(user.getUserId(),extractDefaultDisplayNameFromEmail(email), email);
         }
         return profile;
+    }
+    
+    class Message{
+    	private String message;
+    	private String other;
+    	private String q;
+		public String getMessage() {
+			return message;
+		}
+		public String getOther() {
+			return other;
+		}
+		public String getQ() {
+			return q;
+		}
+		public Message(String message, String other, String q) {
+			super();
+			this.message = message;
+			this.other = other;
+			this.q = q;
+		}
+    	
     }
 	
 }

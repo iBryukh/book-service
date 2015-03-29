@@ -23,8 +23,7 @@ google.devrel.samples.hello = google.devrel.samples.hello || {};
  * Client ID of the application (from the APIs Console).
  * @type {string}
  */
-google.devrel.samples.hello.CLIENT_ID =
-    'replace this with your web client ID';
+google.devrel.samples.hello.CLIENT_ID = "";
 
 /**
  * Scopes used by the application.
@@ -78,8 +77,8 @@ google.devrel.samples.hello.auth = function() {
 };
 
 /**
- * Prints a greeting to the greeting log.
- * param {Object} greeting Greeting to print.
+ * Prints a greeting to the greeting log. param {Object} greeting Greeting to
+ * print.
  */
 google.devrel.samples.hello.print = function(greeting) {
   var element = document.createElement('div');
@@ -92,11 +91,12 @@ google.devrel.samples.hello.print = function(greeting) {
  * Gets a numbered greeting via the API.
  * @param {string} id ID of the greeting.
  */
-google.devrel.samples.hello.getGreeting = function(id) {
-  gapi.client.helloworld.greetings.getGreeting({'id': id}).execute(
+google.devrel.samples.hello.getGreeting = function() {
+  gapi.client.booksapi.getMessage().execute(
       function(resp) {
         if (!resp.code) {
-          google.devrel.samples.hello.print(resp);
+          //google.devrel.samples.hello.print(resp);
+        	alert('error');
         } else {
           window.alert(resp.message);
         }

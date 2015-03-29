@@ -1,10 +1,8 @@
 #about-book-container{
     margin-top: 80px;
 }
-
 .book{
     padding-top: 50px;
-    width: inherit;
     height: 500px;
 }
 .book-cover{
@@ -28,4 +26,80 @@
 .annotations{
     margin-top: 40px;
     font-size: 15px;
+}
+.before-comments{
+    width: 80%;
+}
+@media (max-width: 768px) {
+    #about-book-container{
+        margin-top: 30px;
+    }
+    .book-cover img {
+        width: 200px;
+        height: 300px;
+    }
+    .about-book{
+        margin-left: 220px;
+        font-family: Jura;
+    }
+    .author-name{
+        font-size: 25px;
+    }
+    .story-name{
+        font-size: 15px;
+    }
+    .annotations{
+        margin-top: 40px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    #about-book-container{
+        margin-top: 20px;
+    }
+    .book-cover img {
+        width: 170px;
+        height: 260px;
+    }
+    .about-book{
+        margin-left: 190px;
+        font-family: Jura;
+    }
+    .author-name{
+        font-size: 23px;
+    }
+    .story-name{
+        font-size: 18px;
+    }
+
+    .annotations{
+        margin-top: 40px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    #about-book-container{
+        margin-top: 10px;
+    }
+    .book-cover img {
+        width: 100px;
+        height: 160px;
+    }
+    .about-book{
+        margin-left: 130px;
+        font-family: Jura;
+    }
+    .author-name{
+        font-size: 20px;
+    }
+    .story-name{
+        font-size: 15px;
+    }
+
+    .annotations{
+        margin-top: 40px;
+        font-size: 12px;
+    }
 }

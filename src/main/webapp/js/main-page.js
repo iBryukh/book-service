@@ -11,7 +11,32 @@ books_array.push({
     dislikes: 10,
     book_id: 'sbrtd5hs6qsbr64'
 });
+books_array.push({
+    author: 'Author Name 2',
+    title: 'The Story Name',
+    cover: 'resources/cover2.jpg',
+    likes: 120,
+    dislikes: 10,
+    book_id: 'sbrtd5hs6qsbr64'
+});
+/*
+function init(){
+	var rootpath = "https://" + window.location.host + "/_ah/api";
+	gapi.client.load('booksapi', 'v1', start, rootpath);
+}
 
+function start(){
+	alert('start');
+	var request = gapi.client.booksapi.message();
+	alert('a');
+	request.execute(sayHelloCallback);
+}
+
+function sayHelloCallback (response){
+	alert('call back');
+	alert(response);	
+}
+*/
 
 function on_load(){
     generate_page();

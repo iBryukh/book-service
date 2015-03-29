@@ -11,7 +11,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/fonts.css" rel="stylesheet" />
     <link href="css/general.css" rel="stylesheet" />
-    <link href="css/book.css" rel="stylesheet" />
+    <link href="css/upload.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
@@ -20,7 +20,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/global.js"></script>
-    <script src="js/book.js"></script>
+    <script src="js/upload.js"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -52,32 +52,17 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
-<div id="about-book-container" class="container">
-    <div class="book">
-        <span class="book-cover">
-            <img src="resources/cover2.jpg" />
-        </span>
-        <div class="about-book">
-            <p class="author-name">Author Name</p>
-            <p class="story-name">The Title of The Story</p>
-            <i class='fa fa-thumbs-up fa-2x'></i>120
-            <i class='fa fa-thumbs-down fa-2x'></i>10
-            <div class="annotations">
-                I'm Beth. I've read Harry Potter every year since it's come out. It's long been a goal of mine to buy paperbacks so I can write in them and not ruin my nice hardback copies.
-
-                This is where I come to spazz about Harry Potter. All the book text belongs to JK Rowling. All the notes/questions/insights are mine.
-
-                *Please note that I have a complete set of hardbacks I haven't written in, and that I bought a set of paperbacks for this purpose before you yell at me for writing in the books. Thank you. Everyone who has reblogged one of my posts to comment about how awful it is to write in books has missed the point of this blog.*
-
-                “Print will never die. There’s no substitute for the feel of an actual book. I adore physically turning pages, and being able to underline passages and not worrying about dropping them in the bath or running out of power. I also find print books objects of beauty.” ~JK Rowling
+<div id="load-form" class="container">
+    <form>
+        <span>
+            <div class="book-cover">
+                <img id="cover" name="cover" src="resources/default-cover.jpg"/>
+                <div class="inputWrapper">
+                    <input id="load-file" type="file" accept="image/*" onchange="loadFile(event)" />
+                </div>
             </div>
-        </div>
-    </div>
-</div> <!-- /container -->
-<hr class="before-comments">
-<div id="comments" class="container">
-    aerg
+        </span>
+    </form>
 </div>
 </body>
 </html>
