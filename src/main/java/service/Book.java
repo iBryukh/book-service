@@ -9,6 +9,7 @@ import service.BooksApi.Message;
 
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxEntry;
+import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWriteMode;
 import com.google.api.client.util.Base64;
@@ -112,17 +113,11 @@ public class Book {
 		dislikes++;
 		if (bool) likes--;
 	}
-	public String getImage() {
-		return image;
+	public String getImage() throws DbxException {
+		return DropboxClient.getClient().createTemporaryDirectUrl(image).url;
 	}
 
 	private static String saveImage(String image, String title) throws Exception {
-
-		DbxRequestConfig dbxRequestConfig = new DbxRequestConfig(
-				"BooksService/1.0", Locale.getDefault().toString(), NoHttpsRequestor.Instance);
-		
-		String authAccessToken = "dANzZIkRsdAAAAAAAAAABzJy0QNIL0ZlVdUVwjdJBMl3_wD5TNfxcjNWwLVKLsdI";
-		DbxClient dbxClient = new DbxClient(dbxRequestConfig, authAccessToken);
 		String[] split = image.split(";base64,");
 		String type = split[0];
 		type = type.split("/")[1];
@@ -130,17 +125,16 @@ public class Book {
 		String fileName = "cover."+type;
 		byte[] bytes = Base64.decodeBase64(image);
 		ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
-		String sharedUrl;
+		String url;
 		try {
-			DbxEntry.File uploadedFile = dbxClient.uploadFile("/covers/" + title + "/" + fileName,
+			DbxEntry.File uploadedFile = DropboxClient.getClient().uploadFile("/covers/" + title + "/" + fileName,
 					DbxWriteMode.add(), bytes.length, bis);
-			//sharedUrl = dbxClient.createShareableUrl(uploadedFile.path + uploadedFile.name);
-			sharedUrl = dbxClient.createShareableUrl(uploadedFile.path);
+			url = uploadedFile.path;
 		} finally {
 			bis.close();
 		}
 		
-		return sharedUrl;
+		return url;
 	}
 	
 }
