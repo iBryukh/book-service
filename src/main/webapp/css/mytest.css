@@ -1,31 +1,40 @@
 .col-lg-4{
-	padding: 2%;
-    margin: 2%;
-	background-color:beige;
+	padding: 5px;
+    margin: 15px;
+	background-color:white;
 	width:27.3%;
 	float:left;
 	
 	
 }
 
-h2{
-    text-align: center;
+.title{
+    text-align: left;
 	font-weight: 600;
     color:darkred;
-    padding: 2%;
-	float: left;
+    padding: 5px;
+	font-size:30px;
+	margin-left:200px;
+	
 	
 }
+.author{
+	 text-align: left;
+	font-weight: 600;
+    color:darkred;
+    padding: 5px;
+	font-size:20px;
+}
 .annotation{
-
-    text-align: center;
+	font-family: Jura;
+    text-align: left;
     color:darkred;
 	font-style: italic;
 	font-weight: 600;
-	background-color:floralwhite;
-    padding: 2%;
-	margin:2% ;
-	float:left;
+	font-size: 18px;
+	background-color:white;
+    padding: 5px;
+	margin:10px ;
 }
 
 
@@ -38,26 +47,145 @@ h2{
 }
 
 img{
-    float:left;
+	float:left;
+	
 }
-@media(max-width: 500px){
+@media(max-width:1000px){
+	.col-lg-4{
+	padding: 5px;
+    margin: 15px;
+	background-color:white;
+	width:27.3%;
+	float:left;
+	
+	
+}
+
+.title{
+    text-align: left;
+	font-weight: 600;
+    color:darkred;
+    padding: 5px;
+	font-size:30px;
+	margin-left:5px;
+	
+	
+}
+.author{
+	 text-align: left;
+	font-weight: 600;
+    color:darkred;
+    padding: 5px;
+	font-size:20px;
+}
+.annotation{
+	font-family: Jura;
+    text-align: left;
+    color:darkred;
+	font-style: italic;
+	font-weight: 600;
+	font-size: 18px;
+	background-color:white;
+    padding: 5px;
+	margin:10px ;
+}
+
+
+.view-det a{
+	border-color: darkred;
+	color:darkred;
+	font-weight: 600;	
+	float:left;
+	background-color: beige;
+}
+
+img{
+	float:left;
+	
+}
+	
+}
+@media(max-width: 768px){
 	.col-lg-4{
 	padding: 2%;
     margin: 2%;
-	background-color:beige;
+	background-color:white;
 	float:left;
 	width:98%;	
 	
 	
 }
 
-h2{
-    text-align: center;
+.title{
+    text-align: left;
 	font-weight: 600;
     color:darkred;
-    padding: 2%;
-	float: left;
+    padding: 5px;
+	font-size:30px;
+	margin-left:5px;
 	
+	
+}
+.author{
+	 text-align: left;
+	font-weight: 600;
+    color:darkred;
+    padding: 5px;
+	font-size:20px;
+}
+.annotation{
+	
+	text-align: left;
+    color:darkred;
+	font-style: italic;
+	font-weight: 600;
+	font-size: 16px;
+	background-color:white;
+    padding: 5px;
+	margin:20px ;
+	
+	
+}
+
+
+.view-det a{
+	border-color: darkred;
+	color:darkred;
+	font-weight: 600;	
+	float:left;
+	background-color: white;
+}
+
+img{
+    float:left;
+}
+
+}
+@media (max-width: 360px) {
+	.col-lg-4{
+	padding: 2%;
+    margin: 2%;
+	background-color:white;
+	float:left;
+	width:98%;	
+}
+
+.title{
+    text-align: left;
+	font-weight: 600;
+    color:darkred;
+    padding: 5px;
+	font-size:30px;
+	margin-left:5px;
+	
+	
+}
+.author{
+	 text-align: left;
+	font-weight: 600;
+    color:darkred;
+    padding: 5px;
+	font-size:20px;
 }
 .annotation{
 
@@ -65,9 +193,10 @@ h2{
     color:darkred;
 	font-style: italic;
 	font-weight: 600;
-	background-color:floralwhite;
-    padding: 2%;
-	margin:2% ;
+	font-size: 12px;
+	background-color:white;
+    padding: 5px;
+	margin:10px ;
 	float:left;
 }
 
@@ -77,7 +206,7 @@ h2{
 	color:darkred;
 	font-weight: 600;	
 	float:left;
-	background-color: beige;
+	background-color: white;
 }
 
 img{
@@ -85,6 +214,10 @@ img{
 }
 
 }
+
+
+
+
 
 
 
