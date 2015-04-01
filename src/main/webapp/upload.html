@@ -54,14 +54,33 @@
 </nav>
 <div id="load-form" class="container">
     <form>
-        <span>
-            <div class="book-cover">
-                <img id="cover" name="cover" src="resources/default-cover.jpg"/>
-                <div class="inputWrapper">
-                    <input id="load-file" type="file" accept="image/*" onchange="loadFile(event)" />
-                </div>
+        <ul>
+        <li class="book-cover">
+            <img id="cover" name="cover" src="resources/default-cover.jpg"/>
+            <div class="inputWrapper">
+                <input id="load-file" type="file" accept="image/*" onchange="loadFile(event)"  />
             </div>
-        </span>
+        </li>
+        <li class="information">
+            Author: <br />
+            <input class="line" type="text"> <br />
+            Title: <br />
+            <input class="line" type="text"> <br />
+            Year: <br />
+            <input class="line" type="text"> <br />
+            Genre(split by comma): <br />
+            <input class="line" type="text"> <br />
+            Annotation: <br />
+            <textarea class="multi-line" type="text"></textarea> <br />
+            Quotes: <br />
+            <div id="quotes">
+                <a class="fa fa-plus fa-2x plus" onclick=""></a>
+                <textarea class="multi-line" type="text"></textarea>
+                <br />
+            </div>
+
+        </li>
+        </ul>
     </form>
 </div>
 </body>

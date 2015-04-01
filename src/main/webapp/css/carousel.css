@@ -45,6 +45,24 @@
     }
 }
 
+
+@media (min-width: 1900px) {
+    .carousel {
+        height: 600px;
+    }
+
+    .carousel .item {
+        height: 600px;
+    }
+    .carousel-inner > .item > img {
+        height: 600px;
+    }
+    .quotes{
+        font-size: 25px;
+    }
+}
+
+
 @media (max-width: 360px) {
     .quotes{
         font-size: 18px;

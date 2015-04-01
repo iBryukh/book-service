@@ -62,6 +62,7 @@ a:hover, a:visited, a:link, a:active{
     }
     */
 }
+
 /*when screen has width less then 500px there is no space for text from the left size of picture*/
 @media (max-width: 500px) {
     .cover-container{
