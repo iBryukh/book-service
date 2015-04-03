@@ -17,6 +17,7 @@ public class Profile {
 	private List <String> disliked = new ArrayList<String>(0);
 
 	@Id String userId;
+	
     public Profile (String userId, String displayName, String mainEmail) {
     	this.userId = userId;
     	this.displayName = displayName;

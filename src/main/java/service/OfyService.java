@@ -10,6 +10,7 @@ public class OfyService {
     static {
         factory().register(Profile.class);
         factory().register(Book.class);
+        factory().register(Comment.class);
     }
 
     public static Objectify ofy() {
