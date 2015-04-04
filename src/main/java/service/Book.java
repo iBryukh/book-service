@@ -28,6 +28,7 @@ public class Book {
 	
 	@Id
 	private Long id;
+	@Index
 	private String title;
 	private String author;
 	private int year;
@@ -113,8 +114,12 @@ public class Book {
 		dislikes++;
 		if (bool) likes--;
 	}
-	public String getImage() throws DbxException {
-		return DropboxClient.getClient().createTemporaryDirectUrl(image).url;
+	public String getImage() {
+		try {
+			return DropboxClient.getClient().createTemporaryDirectUrl(image).url;
+		} catch (Exception e) {
+			return "";
+		}
 	}
 
 	private static String saveImage(String image, String title) throws Exception {

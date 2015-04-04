@@ -1,6 +1,5 @@
 package service;
 
-
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxEntry;
 import com.dropbox.core.DbxRequestConfig;
@@ -14,16 +13,7 @@ import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
-
-
-
-
-
-
-
-
-
-
+import com.googlecode.objectify.cmd.Query;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -139,14 +129,50 @@ public class BooksApi {
 		return profile;
 	}
 
-	@ApiMethod(name = "queryBooks", path = "books", httpMethod = HttpMethod.GET)
-	public List<Book> queryBooks() {
-		int limit = 3;
-		List<Book> books = ofy().load().type(Book.class).order("-likes")
-				.limit(limit).list();
+	@ApiMethod(name = "queryBooks", path = "books", httpMethod = HttpMethod.POST)
+	public List<Book> queryBooks(final BookQuery q) {
+		int limit = (q.getLimit() == 0) ? 10 : q.getLimit();
+		Query<Book> query;
+		String field = q.getField();
+		if (field == null)
+			query = ofy().load().type(Book.class).order("-likes")
+					.offset(q.getOffset()).limit(limit);
+		else {
+			field = field.split(" ")[0];
+			field = (""+field.charAt(0)).toUpperCase() + field.substring(1).toLowerCase();
+			query = ofy().load().type(Book.class)
+					.filter("title >=", field)
+					.filter("title <", field + "\uFFFD")
+					.offset(q.getOffset()).limit(limit);
+		}
+		List<Book> books = query.list();
 		return books;
 	}
 	
+	@ApiMethod(name = "commentBook", path = "book/{websafeBookKey}/comment", httpMethod = HttpMethod.POST)
+	public Comment commentBook(final User user,
+			@Named("websafeBookKey") final String websafeBookKey, final CommentForm form) throws UnauthorizedException {
+		if (form.getComment()==null || form.getComment().length()>2) return null;
+		if (user == null) {
+			throw new UnauthorizedException("Authorization required");
+		}
+        String userId = user.getUserId();
+        Key<Profile> profileKey = Key.create(Profile.class,userId);
+        Key<Book> bookKey = Key.create(websafeBookKey);
+        final Key<Comment> commentKey = OfyService.factory().allocateId(bookKey, Comment.class);
+        final long commentId = commentKey.getId();
+		Comment comment = new Comment(commentId, bookKey, profileKey, form);
+		ofy().save().entity(comment).now();
+		return comment;
+	}
+	
+	@ApiMethod(name = "getComments", path = "book/{websafeBookKey}/getcomments", httpMethod = HttpMethod.POST)
+	public List<Comment> getComments(@Named("websafeBookKey") final String websafeBookKey) {
+		Key<Comment> bookKey = Key.create(websafeBookKey);
+        Query query = ofy().load().type(Comment.class).ancestor(bookKey);
+        return query.list();
+	}
+
 	class Message {
 		private String message;
 
