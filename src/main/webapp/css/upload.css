@@ -10,12 +10,17 @@ ul {
 li {
     float: left;
 }
-#load-form.container{
+hr{
+    width: 80%;
+    margin-bottom: 50px;
+}
+.load-form{
     margin-top: 50px;
+    margin-left: 170px;
 }
 #cover{
-    width: inherit;
-    height: inherit;
+    width: 300px;
+    height: 450px;
 }
 .book-cover{
     width: 300px;
@@ -27,8 +32,11 @@ li {
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    /*Using a background color, but you can use a background image to represent a button*/
+    font-family: Jura;
+    text-align: center;
+    padding-top: 5px;
     background-color: #222222;
+    color: #ffffff;
 }
 #load-file {
     cursor: pointer;
@@ -42,10 +50,22 @@ li {
     /*Opacity settings for all browsers*/
     opacity: 0;
 }
+#submit{
+    width: 500px;
+    height: 32px;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    border: 1px solid;
+    background-color: #222222;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 4px;
+}
 .information{
     font-family: Jura;
     margin-top: 30px;
     margin-left: 150px;
+    width: 600px;
 }
 .information input{
     margin-bottom: 8px;
@@ -79,7 +99,50 @@ li {
 .multi-line:focus {
     box-shadow: inset 0px 1px 2px #A4A4A4;
 }
-.plus{
+.add-remove{
     float: right;
-    margin: 10px 0px 0px 10px;
+    margin-right: 66px;
+    margin-top: 10px;
+}
+
+@media (max-width: 1219px) {
+    .book-cover{
+        margin-left: 150px;
+        margin-bottom: 50px;
+    }
+    .information{
+        font-family: Jura;
+        margin-top: 30px;
+        margin-left: 80px;
+        width: 500px;
+    }
+    .line{
+        width: 450px;
+    }
+    .multi-line{
+        width: 450px;
+    }
+    .add-remove{
+        margin-right: 20px;
+    }
+    #submit{
+        width: 450px;
+    }
+}
+@media (max-width: 991px) {
+    .information{
+        font-family: Jura;
+        margin-top: 30px;
+        margin-left: 80px;
+        width: 450px;
+    }
+    .line{
+        width: 400px;
+    }
+    .multi-line{
+        width: 400px;
+    }
+    .add-remove{
+        margin-right: 20px;
+    }
 }
