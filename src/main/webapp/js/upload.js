@@ -45,7 +45,7 @@ $(document).ready(function() {
         request['quotes'] = quotes;
         request['annotation'] = annotation;
         request['genre'] = [];
-        request['year'] = year;
+        request['year'] = 1999;//year;
         request['tags'] = [];
         request['image'] = IMAGE;   
         alert('create request');
