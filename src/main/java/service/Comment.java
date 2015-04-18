@@ -35,7 +35,12 @@ public class Comment {
         return profileKey.getString();
     }
     public String getAuthorName() {
-        return OfyService.ofy().load().key(profileKey).now().getDisplayName();
+        Profile user = OfyService.ofy().load().key(getProfileKey()).now();
+        if (user == null) {
+            return "Anonymous";
+        } else {
+            return user.getDisplayName();
+        }
     }
     public String getWebsafeKey() {
         return Key.create(Comment.class, id).getString();
@@ -46,6 +51,7 @@ public class Comment {
 	public String getComment() {
 		return comment;
 	}
+	@ApiResourceProperty(ignored = AnnotationBoolean.TRUE)
 	public Key<Profile> getProfileKey() {
 		return profileKey;
 	}

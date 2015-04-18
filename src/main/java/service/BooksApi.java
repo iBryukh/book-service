@@ -1,11 +1,5 @@
 package service;
 
-import com.dropbox.core.DbxClient;
-import com.dropbox.core.DbxEntry;
-import com.dropbox.core.DbxRequestConfig;
-import com.dropbox.core.DbxWriteMode;
-import com.dropbox.core.http.HttpRequestor;
-import com.google.api.client.util.Base64;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
@@ -15,12 +9,8 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.cmd.Query;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Locale;
+
 
 import javax.inject.Named;
 
