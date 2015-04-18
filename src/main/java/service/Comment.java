@@ -31,7 +31,6 @@ public class Comment {
         this.comment = form.getComment();
     }
     
-    
     public String getAuthorId() {
         return profileKey.getString();
     }

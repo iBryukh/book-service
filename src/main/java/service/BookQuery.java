@@ -6,6 +6,11 @@ public class BookQuery {
 	private int offset;
 	private BookQuery(){}
 	
+	public BookQuery(int limit, int offset){
+		this.limit = limit;
+		this.offset = offset;
+	}
+	
 	public String getField() {
 		return field;
 	}

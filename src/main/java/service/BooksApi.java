@@ -102,7 +102,7 @@ public class BooksApi {
 	}
 
 	@ApiMethod(name = "likeBook", path = "book/{websafeBookKey}/like", httpMethod = HttpMethod.POST)
-	public Profile likeBook(final User user,
+	public Message likeBook(final User user,
 			@Named("websafeBookKey") final String websafeBookKey)
 			throws UnauthorizedException {
 		if (user == null) {
@@ -110,13 +110,13 @@ public class BooksApi {
 		}
 		Profile profile = getProfileFromUser(user);
 		Book book = getBook(user, websafeBookKey);
-		profile.likeBook(book);
+		profile.likeBook(user, book);
 		ofy().save().entities(profile, book).now();
-		return profile;
+		return new Message(book.getLikes()+","+book.getDislikes());
 	}
 
 	@ApiMethod(name = "dislikeBook", path = "book/{websafeBookKey}/dislike", httpMethod = HttpMethod.POST)
-	public Profile dislikeBook(final User user,
+	public Message dislikeBook(final User user,
 			@Named("websafeBookKey") final String websafeBookKey)
 			throws UnauthorizedException {
 		if (user == null) {
@@ -124,9 +124,9 @@ public class BooksApi {
 		}
 		Profile profile = getProfileFromUser(user);
 		Book book = getBook(user, websafeBookKey);
-		profile.dislikeBook(book);
+		profile.dislikeBook(user, book);
 		ofy().save().entities(profile, book).now();
-		return profile;
+		return new Message(book.getLikes()+","+book.getDislikes());
 	}
 
 	@ApiMethod(name = "queryBooks", path = "books", httpMethod = HttpMethod.POST)
@@ -152,7 +152,7 @@ public class BooksApi {
 	@ApiMethod(name = "commentBook", path = "book/{websafeBookKey}/comment", httpMethod = HttpMethod.POST)
 	public Comment commentBook(final User user,
 			@Named("websafeBookKey") final String websafeBookKey, final CommentForm form) throws UnauthorizedException {
-		if (form.getComment()==null || form.getComment().length()>2) return null;
+		if (form.getComment()==null || form.getComment().length()<2) return null;
 		if (user == null) {
 			throw new UnauthorizedException("Authorization required");
 		}
