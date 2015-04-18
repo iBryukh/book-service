@@ -1,7 +1,3 @@
-/**
- * Created by Oleh Kurpiak on 3/26/2015.
- */
-
 function getJsonFromUrl() {
     var query = location.search.substr(1);
     var result = {};

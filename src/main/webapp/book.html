@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Book Service</title>
+    <title>Book</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -20,7 +20,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/global.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/book.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -30,7 +32,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body onload="on_load()">
+<body>
 <nav class="navbar navbar-default navbar-static-top header">
     <div class="container">
         <div class="navbar-header">
@@ -43,9 +45,11 @@
             <a class="navbar-brand logotype" href="index.html">Book Service</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+            <!--
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" id="exit">Exit</a></li>
             </ul>
+            -->
             <form class="navbar-form navbar-right">
                 <input type="text" id="search" placeholder="Search...">
             </form>
@@ -54,6 +58,7 @@
 </nav>
 
 <div id="about-book-container" class="container">
+    <!--
     <div class="book">
         <span class="book-cover">
             <img src="resources/cover2.jpg" />
@@ -74,10 +79,13 @@
             </div>
         </div>
     </div>
+    -->
 </div> <!-- /container -->
+
 <hr class="before-comments">
 <div id="comments" class="container">
     aerg
 </div>
+
 </body>
 </html>

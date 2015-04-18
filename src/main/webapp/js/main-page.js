@@ -2,6 +2,7 @@ var BOOKS_IN_ROW = 4;
 var books_array = [];
 
 function init(){
+    auth();
     var rootpath = "https://" + window.location.host + "/_ah/api";
     gapi.client.load('bookapi', 'v1', load, rootpath);
 }
@@ -50,7 +51,7 @@ function about_book(index){
     //div.innerHTML = "<p class='author'>" + books_array[index]['author']+"</p>";
     div.innerHTML += "<p class='story-name'>"+books_array[index]['title']+"</p>";
     div.innerHTML += "<i class='fa fa-thumbs-up fa-2x'></i>" + books_array[index]['likes'];
-    div.innerHTML += "<i class='fa fa-thumbs-down fa-2x'></i>"+books_array[index]['dislikes'];
+    div.innerHTML += "<i class='fa fa-thumbs-down fa-2x' style='margin-left: 5px;'></i>"+books_array[index]['dislikes'];
 
     return div;
 }

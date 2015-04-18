@@ -64,10 +64,3 @@ function create(){
 	};
 	reader.readAsDataURL(file);
 }
-
-
-
-
-
-
-
