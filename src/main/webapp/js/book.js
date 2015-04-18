@@ -1,6 +1,25 @@
 var ID = getJsonFromUrl()['id'];
 var BOOK;
 
+$(document).ready(function(){
+	$('#submit').click(function(){
+		var comment = $('#comment').val();
+		gapi.client.bookapi.commentBook({'websafeBookKey': ID, 'comment': comment}).execute(func);
+	});
+	$('body').on('click', '.fa-thumbs-up', function(){
+		alert('a');
+	});
+	$('body').on('click', '.fa-thumbs-down', function(){
+		alert('b');
+	});
+});
+
+function func(response){
+	for(var key in response){
+		alert(key+": " + response[key]);
+	}
+}
+
 function init(){
 	auth();
 	var rootpath = "https://" + window.location.host + "/_ah/api";
@@ -9,6 +28,7 @@ function init(){
 
 function load(){
 	gapi.client.bookapi.getBook({'websafeBookKey': ID}).execute(ex);
+	gapi.client.bookapi.getComments({'websafeBookKey': ID})
 }
 
 function ex(response){
