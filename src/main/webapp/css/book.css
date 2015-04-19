@@ -1,9 +1,25 @@
+#like{
+    margin-left: 1px;
+    margin-right: 10px;
+}
+#dislike{
+    margin-left: 1px;
+}
+.after-comments{
+    width: 90%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+.before-comments{
+    width: 90%;
+    margin-bottom: 50px;
+}
 #about-book-container{
-    margin-top: 80px;
+    margin-top: 30px;
 }
 .book{
     padding-top: 50px;
-    height: 500px;
+    /*height: 500px;*/
 }
 .book-cover{
     position: absolute;
@@ -22,13 +38,15 @@
 .story-name{
     font-size: 20px;
 }
-
 .annotations{
     margin-top: 40px;
     font-size: 15px;
 }
-.before-comments{
-    width: 90%;
+.quotes{
+    margin-top: 30px;
+}
+.quote{
+    margin-bottom: 10px;
 }
 .comment{
     margin-left: 20%;

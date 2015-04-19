@@ -7,17 +7,17 @@ $(document).ready(function(){
 		gapi.client.bookapi.commentBook({'websafeBookKey': ID, 'comment': comment}).execute(func);
 	});
 	$('body').on('click', '.fa-thumbs-up', function(){
-		alert('a');
+		gapi.client.bookapi.likeBook({'websafeBookKey': ID}).execute(func);
 	});
 	$('body').on('click', '.fa-thumbs-down', function(){
-		alert('b');
+		gapi.client.bookapi.dislikeBook({'websafeBookKey': ID}).execute(func);
 	});
 });
 
 function func(response){
-	for(var key in response){
-		alert(key+": " + response[key]);
-	}
+	var marks = response.message.split(',');
+	$('#like').text(marks[0]);
+	$('#dislike').text(marks[1]);
 }
 
 function init(){
@@ -28,7 +28,7 @@ function init(){
 
 function load(){
 	gapi.client.bookapi.getBook({'websafeBookKey': ID}).execute(ex);
-	gapi.client.bookapi.getComments({'websafeBookKey': ID})
+	//gapi.client.bookapi.getComments({'websafeBookKey': ID})
 }
 
 function ex(response){
@@ -56,8 +56,8 @@ function about_book(){
 	div.className = 'about-book';
 	//div.innerHTML = '<p class="author-name">' + BOOK['autho'] + '</p>';
 	div.innerHTML += '<p class="story-name">' + BOOK['title'] + '</p>';
-	div.innerHTML += '<i class="fa fa-thumbs-up fa-2x"></i>' + BOOK['likes'];
-	div.innerHTML += '<i class="fa fa-thumbs-down fa-2x" style="margin-left: 15px;"></i>' + BOOK['dislikes'];
+	div.innerHTML += '<i class="fa fa-thumbs-up fa-2x"></i><span id="like">' + BOOK['likes'] + '</span>';
+	div.innerHTML += '<i class="fa fa-thumbs-down fa-2x" style="margin-left: 15px;"></i><span id="dislike">' + BOOK['dislikes'] + '</span>';
 	//div.innerHTML += '<div class="annotations">' + BOOK['annotations'] + '</div>';
 
 	return div;

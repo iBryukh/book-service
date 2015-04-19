@@ -22,9 +22,9 @@ function auth() {
         signin(false, handleAuth);
     };
 
-    if(!window.name){
+    //if(!window.name){
         gapi.client.load('oauth2','v2', function() {
             signin(false, handleAuth);
         });
-    }
+    //}
 }
