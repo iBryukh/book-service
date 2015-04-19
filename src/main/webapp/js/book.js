@@ -28,39 +28,46 @@ function init(){
 
 function load(){
 	gapi.client.bookapi.getBook({'websafeBookKey': ID}).execute(ex);
-	//gapi.client.bookapi.getComments({'websafeBookKey': ID})
 }
 
 function ex(response){
 	BOOK = response;
-	generate_page();
+	generatePage();
 }
 
-function generate_page(){
-	var div = document.createElement('div');
-	div.appendChild(book_cover());
-	div.appendChild(about_book());
+function generatePage(){
+	var ul = document.createElement('ul');
+	ul.appendChild(bookCover());
+	ul.appendChild(information());
 
-	document.getElementById('about-book-container').appendChild(div);
+	document.getElementById('about-book-container').appendChild(ul);
 }
 
-function book_cover(){
-	var span = document.createElement('span');
-	span.className = 'book-cover';
-	span.innerHTML = "<img src="+ BOOK['image'] + " />";
+function bookCover(){
+	var li = document.createElement('li');	
+	li.className = 'book-cover';
+	li.innerHTML = '<img src="'+BOOK['image']+'" />';
 
-	return span;
+	return li;
 }
 
-function about_book(){
-	var div = document.createElement('div');
-	div.className = 'about-book';
-	div.innerHTML = '<p class="author-name">' + BOOK['author'] + '</p>';
-	div.innerHTML += '<p class="story-name">' + BOOK['title'] + '</p>';
-	div.innerHTML += '<i class="fa fa-thumbs-up fa-2x"></i><span id="like">' + BOOK['likes'] + '</span>';
-	div.innerHTML += '<i class="fa fa-thumbs-down fa-2x" style="margin-left: 15px;"></i><span id="dislike">' + BOOK['dislikes'] + '</span>';
-	div.innerHTML += '<div class="annotations">' + BOOK['annotations'] + '</div>';
-
-	return div;
+function information(){
+	var li = document.createElement('li');	
+	li.className = 'information';
+	li.innerHTML += '<p class="author-name">'+BOOK['author']+'</p>';
+	li.innerHTML += '<p class="story-name">'+BOOK['title']+'</p>';
+    li.innerHTML += '<i class="fa fa-thumbs-up fa-2x"></i><span id="like">'+BOOK['likes']+'</span>';
+    li.innerHTML += '<i class="fa fa-thumbs-down fa-2x" style="margin-left: 15px;"></i><span id="dislike">'+BOOK['dislikes']+'</span>';
+    li.innerHTML += '<div class="annotations">'+BOOK['annotation']+'</div>';
+    if(BOOK['quotes']){
+	    var quotes = "";
+	    for(var i = 0; i < BOOK['quotes'].length; ++i){
+	    	quotes += '<div class="quote">'
+			quotes += '<p>#'+(i+1)+'</p>';
+			quotes += '<i>'+BOOK['quotes'][i]+'</i>';
+			quotes += '</div>';
+	    }
+	    li.innerHTML += '<div class="quotes">'+quotes+'</div>';
+	}
+	return li;
 }
-
