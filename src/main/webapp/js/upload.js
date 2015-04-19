@@ -1,12 +1,8 @@
-/**
- * Created by Oleh Kurpiak on 3/29/2015.
- */
 var IMAGE = null;
 function init() {
     var rootpath = "https://" + window.location.host + "/_ah/api";
     gapi.client.load('bookapi', 'v1', null, rootpath);
 }
-
 
 $(document).ready(function() {
     $('body').on('click', 'a.fa-plus', function(){
@@ -26,29 +22,23 @@ $(document).ready(function() {
         var request = {};
         var author = $('#author').val();
         var title = $('#title').val();
-        var year = $('#year').val();
-        var genre = $('#genre').val();
+        var year = validYear($('#year').val());
+        var genre = makeGenres($('#genres').val());
         var annotation = $('#annotation').val();
-        var quotes = [];
+        var quotes = makeQuotes($('#quotes textarea'));
         if(!author || !title || !year || !annotation || !IMAGE){
             alert("field null");
             return;
         }
-        alert('success');
-
-        var arrayOfQuotes = $('#quotes textarea');
-        for(var i = 0; i < arrayOfQuotes.length; ++i)
-            quotes.push(arrayOfQuotes[i].value);
 
         request['author'] = author;
         request['title'] = title;
         request['quotes'] = quotes;
         request['annotation'] = annotation;
-        request['genre'] = [];
-        request['year'] = 1999;//year;
-        request['tags'] = [];
-        request['image'] = IMAGE;   
-        alert('create request');
+        request['genre'] = genre;
+        request['year'] = year;
+        //request['tags'] = [];
+        request['image'] = IMAGE;
         gapi.client.bookapi.addBook(request).execute(onBookLoaded);
     });
 });
@@ -64,8 +54,36 @@ function preview(input) {
     }
 }
 
-
 function onBookLoaded (response) {
-    for(var key in response)
-        alert(key + " " + 	response[key]);
+    if(!response.code)
+        alert('success');
+    else
+        alert('problems');
+}
+
+function validYear(year){
+    if(year.length != 4){
+        alert('incorrect year');
+        return null;
+    }
+    if(year < 0 || year > 2015){
+        alert('incorrect year');
+        return null;
+    }
+    return year;
+}
+
+function makeGenres(genre){
+    if(!genre)
+        return null;
+    return genre.split(',');
+}
+
+function makeQuotes(arrayOfQuotes){
+    var quotes = [];
+    for(var i = 0; i < arrayOfQuotes.length; ++i){
+        if(arrayOfQuotes[i].textLength != 0)
+            quotes.push(arrayOfQuotes[i].value);
+    }
+    return quotes;
 }
