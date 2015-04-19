@@ -1,5 +1,8 @@
 var BOOKS_IN_ROW = 4;
-var books_array = [];
+var MOST_LIKED_BOOKS_GRID_ID = 'books-liked-grid';
+var RANDOM_BOOKDS_GRID_ID = 'random-grid';
+var CURRENT_ID;
+var booksArray = [];
 
 function init(){
     auth();
@@ -8,39 +11,41 @@ function init(){
 }
 
 function load(){
-    gapi.client.bookapi.queryBooks().execute(ex);
+    gapi.client.bookapi.queryBooks({'limit': 20, 'type': 0}).execute(liked);
+    gapi.client.bookapi.queryBooks({'limit': 20, 'type': 1}).execute(random);
 }
 
-function ex(response){
-    books_array = response['items'];
-    generate_page();
+function liked(response){
+    booksArray = response['items'];
+    generate_page(MOST_LIKED_BOOKS_GRID_ID);
 }
 
-function generate_page() {
-    for(var i = 0; i <books_array.length; ++i){
-        generate_row(i);
+function random(response){
+    booksArray = response['items'];
+    generate_page(RANDOM_BOOKDS_GRID_ID);
+}
+
+
+function generate_page(id) {
+    for(var i = 0; i <booksArray.length; ++i){
+        for(var j = 0; j < BOOKS_IN_ROW; ++j){
+            generate_book(BOOKS_IN_ROW*i + j, id);
+        }
     }
 }
 
-function generate_row(index){
-    for(var i = 0; i < BOOKS_IN_ROW; ++i){
-        generate_book(BOOKS_IN_ROW*index + i);
-    }
-}
-
-function generate_book(index){
+function generate_book(index, id){
     var div = document.createElement('div');
     div.className = 'col-md-3 one-book';
     div.appendChild(book_cover(index));
     div.appendChild(about_book(index));
-    document.getElementById('books-grid').appendChild(div);
+    document.getElementById(id).appendChild(div);
 }
 
 function book_cover(index){
     var a = document.createElement('a');
-    a.href = "book.html?id="+books_array[index]['websafeKey'];
-    a.innerHTML = "link";
-    //a.innerHTML = "<img class='book-cover' src='" + books_array[index]['cover'] + "' />";
+    a.href = "book.html?id="+booksArray[index]['websafeKey'];
+    a.innerHTML = "<img class='book-cover' src='" + booksArray[index]['image'] + "' />";
 
     return a;
 }
@@ -48,10 +53,10 @@ function book_cover(index){
 function about_book(index){
     var div = document.createElement('div');
     div.className = 'mark';
-    //div.innerHTML = "<p class='author'>" + books_array[index]['author']+"</p>";
-    div.innerHTML += "<p class='story-name'>"+books_array[index]['title']+"</p>";
-    div.innerHTML += "<i class='fa fa-thumbs-up fa-2x'></i>" + books_array[index]['likes'];
-    div.innerHTML += "<i class='fa fa-thumbs-down fa-2x' style='margin-left: 5px;'></i>"+books_array[index]['dislikes'];
+    div.innerHTML = "<p class='author'>" + booksArray[index]['author']+"</p>";
+    div.innerHTML += "<p class='story-name'>"+booksArray[index]['title']+"</p>";
+    div.innerHTML += "<i class='fa fa-thumbs-up fa-2x'></i>" + booksArray[index]['likes'];
+    div.innerHTML += "<i class='fa fa-thumbs-down fa-2x' style='margin-left: 5px;'></i>"+booksArray[index]['dislikes'];
 
     return div;
 }

@@ -1,6 +1,16 @@
 a:hover, a:visited, a:link, a:active{
     text-decoration: none;
 }
+.caption{
+    font-family: Jura;
+    font-size: 25px;
+    text-align: center;
+}
+.divide{
+    width: 90%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 .row {
     margin-bottom: 20px;
 }
