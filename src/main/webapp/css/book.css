@@ -1,9 +1,61 @@
+#about-book-container{
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+
+a:hover, a:visited, a:link, a:active{
+    text-decoration: none;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+li {
+    float: left;
+}
+
+.book-cover{
+    width: 300px;
+    height: 450px;
+    margin-left: 100px;
+}
+.book-cover img{
+    width: 300px;
+    height: 450px;
+}
+.information{
+    font-family: Jura;
+    margin-top: 30px;
+    margin-left: 100px;
+    width: 600px;
+}
+.author-name{
+    font-size: 27px;
+    margin-bottom: 0px;
+}
+.story-name{
+    font-size: 20px;
+    margin-top: 0px;
+}
 #like{
     margin-left: 1px;
     margin-right: 10px;
 }
 #dislike{
     margin-left: 1px;
+}
+.annotations{
+    margin-top: 20px;
+    font-size: 15px;
+}
+.quotes{
+    margin-top: 30px;
+}
+.quote{
+    margin-bottom: 10px;
 }
 .after-comments{
     width: 90%;
@@ -14,44 +66,6 @@
     width: 90%;
     margin-bottom: 50px;
 }
-#about-book-container{
-    margin-top: 30px;
-}
-.book{
-    padding-top: 50px;
-    /*height: 500px;*/
-}
-.book-cover{
-    position: absolute;
-}
-.book-cover img {
-    width: 280px;
-    height: 400px;
-}
-.about-book{
-    margin-left: 400px;
-    font-family: Jura;
-}
-.author-name{
-    font-size: 30px;
-}
-.story-name{
-    font-size: 20px;
-}
-.annotations{
-    margin-top: 40px;
-    font-size: 15px;
-}
-.quotes{
-    margin-top: 30px;
-}
-.quote{
-    margin-bottom: 10px;
-}
-.comment{
-    margin-left: 20%;
-    margin-bottom: 15px;
-}
 .author{
     margin-top: 0px;
     margin-bottom: 0px;
@@ -61,6 +75,10 @@
     margin-top: 0px;
     margin-bottom: 0px;
     font-size: 12px;
+}
+.comment{
+    margin-left: 20%;
+    margin-bottom: 15px;
 }
 .comments-separate{
     width: 80%;
@@ -96,78 +114,3 @@
 #comment-text:focus {
     box-shadow: inset 0px 1px 2px #A4A4A4;
 }
-/*
-@media (max-width: 768px) {
-    #about-book-container{
-        margin-top: 30px;
-    }
-    .book-cover img {
-        width: 200px;
-        height: 300px;
-    }
-    .about-book{
-        margin-left: 220px;
-        font-family: Jura;
-    }
-    .author-name{
-        font-size: 25px;
-    }
-    .story-name{
-        font-size: 15px;
-    }
-    .annotations{
-        margin-top: 40px;
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 500px) {
-    #about-book-container{
-        margin-top: 20px;
-    }
-    .book-cover img {
-        width: 170px;
-        height: 260px;
-    }
-    .about-book{
-        margin-left: 190px;
-        font-family: Jura;
-    }
-    .author-name{
-        font-size: 23px;
-    }
-    .story-name{
-        font-size: 18px;
-    }
-
-    .annotations{
-        margin-top: 40px;
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 360px) {
-    #about-book-container{
-        margin-top: 10px;
-    }
-    .book-cover img {
-        width: 100px;
-        height: 160px;
-    }
-    .about-book{
-        margin-left: 130px;
-        font-family: Jura;
-    }
-    .author-name{
-        font-size: 20px;
-    }
-    .story-name{
-        font-size: 15px;
-    }
-
-    .annotations{
-        margin-top: 40px;
-        font-size: 12px;
-    }
-}
-*/

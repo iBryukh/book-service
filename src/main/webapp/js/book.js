@@ -46,7 +46,8 @@ function generate_page(){
 
 function book_cover(){
 	var span = document.createElement('span');
-	//span.innerHTML = "<img src="+ BOOK['cover'] + " />";
+	span.className = 'book-cover';
+	span.innerHTML = "<img src="+ BOOK['image'] + " />";
 
 	return span;
 }
@@ -54,11 +55,11 @@ function book_cover(){
 function about_book(){
 	var div = document.createElement('div');
 	div.className = 'about-book';
-	//div.innerHTML = '<p class="author-name">' + BOOK['autho'] + '</p>';
+	div.innerHTML = '<p class="author-name">' + BOOK['author'] + '</p>';
 	div.innerHTML += '<p class="story-name">' + BOOK['title'] + '</p>';
 	div.innerHTML += '<i class="fa fa-thumbs-up fa-2x"></i><span id="like">' + BOOK['likes'] + '</span>';
 	div.innerHTML += '<i class="fa fa-thumbs-down fa-2x" style="margin-left: 15px;"></i><span id="dislike">' + BOOK['dislikes'] + '</span>';
-	//div.innerHTML += '<div class="annotations">' + BOOK['annotations'] + '</div>';
+	div.innerHTML += '<div class="annotations">' + BOOK['annotations'] + '</div>';
 
 	return div;
 }
