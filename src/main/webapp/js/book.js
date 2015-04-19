@@ -4,7 +4,8 @@ var BOOK;
 $(document).ready(function(){
 	$('#submit').click(function(){
 		var comment = $('#comment-text').val();
-		gapi.client.bookapi.commentBook({'websafeBookKey': ID, 'comment': comment}).execute(addComment);
+		if(comment.length > 0)
+			gapi.client.bookapi.commentBook({'websafeBookKey': ID, 'comment': comment}).execute(addComment);
 	});
 	$('body').on('click', '.fa-thumbs-up', function(){
 		gapi.client.bookapi.likeBook({'websafeBookKey': ID}).execute(func);
@@ -18,6 +19,7 @@ function addComment(response){
 	if(response.code)
 		return;
 	comment(response);
+	$('#comment-text').text("");
 }
 
 function func(response){
@@ -38,6 +40,8 @@ function load(){
 }
 
 function ex(response){
+	if(response.code)
+		window.location = "404.html";
 	BOOK = response;
 	generatePage();
 }

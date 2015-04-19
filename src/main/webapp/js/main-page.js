@@ -54,7 +54,7 @@ function about_book(index){
     var div = document.createElement('div');
     div.className = 'mark';
     div.innerHTML = "<p class='author'>" + booksArray[index]['author']+"</p>";
-    div.innerHTML += "<p class='story-name'>"+booksArray[index]['title']+"</p>";
+    div.innerHTML += "<a href='book.html?id="+booksArray[index]['websafeKey']+"'><p class='story-name'>"+booksArray[index]['title']+"</p>";
     div.innerHTML += "<i class='fa fa-thumbs-up fa-2x'></i>" + booksArray[index]['likes'];
     div.innerHTML += "<i class='fa fa-thumbs-down fa-2x' style='margin-left: 5px;'></i>"+booksArray[index]['dislikes'];
 

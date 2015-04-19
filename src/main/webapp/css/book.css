@@ -47,6 +47,12 @@ li {
 #dislike{
     margin-left: 1px;
 }
+.fa-thumbs-up{
+    cursor: pointer;
+}
+.fa-thumbs-down{
+    cursor: pointer;
+}
 .annotations{
     margin-top: 20px;
     font-size: 15px;
@@ -95,6 +101,7 @@ li {
     padding-top: 4px;
     margin-left: auto;
     margin-right: auto;
+    cursor  : pointer;
 }
 #comment-text{
     width: 70%;
