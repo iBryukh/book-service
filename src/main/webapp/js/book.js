@@ -29,7 +29,6 @@ function func(response){
 }
 
 function init(){
-	auth();
 	var rootpath = "https://" + window.location.host + "/_ah/api";
     gapi.client.load('bookapi', 'v1', load, rootpath);
 }	

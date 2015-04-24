@@ -11,6 +11,7 @@ a:hover, a:visited, a:link, a:active{
     font-family: Jura;
     font-size: 25px;
     text-align: center;
+    margin-bottom: 80px;
 }
 .divide{
     width: 90%;

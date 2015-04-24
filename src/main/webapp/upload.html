@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Book Service</title>
 
+    <link rel="shortcut icon" href="resources/book.png">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/fonts.css" rel="stylesheet" />
@@ -20,6 +21,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/global.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/upload.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
 
@@ -31,7 +33,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body onload="on_load()">
+<body>
 <nav class="navbar navbar-default navbar-static-top header">
     <div class="container">
         <div class="navbar-header">
@@ -44,18 +46,17 @@
             <a class="navbar-brand logotype" href="index.html">Book Service</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <!--
+            
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" id="exit">Exit</a></li>
+                <li><a href="upload.html" id="add-book">Add Book</a></li>
+                <li><a href="#" id="exit">Sing In</a></li>
             </ul>
-            -->
             <form class="navbar-form navbar-right" action="result.html" method="get">
                 <input type="text" id="search" name="q" placeholder="Search...">
             </form>
         </div>
     </div>
 </nav>
-
 <div class="load-form" class="container">
     <ul>
         <li class="book-cover">
