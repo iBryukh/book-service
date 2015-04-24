@@ -22,7 +22,6 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.condition.IfNotZero;
 
-@Cache
 @Entity
 public class Book {
 	
@@ -32,7 +31,7 @@ public class Book {
 	private String title;
 	private String author;
 	private int year;
-	@Index (IfNotZero.class)
+	@Index
 	private int likes;
 	private int dislikes;
 	private List<String> genre = new ArrayList<String>(0);

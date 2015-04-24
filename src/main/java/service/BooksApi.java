@@ -10,8 +10,8 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.cmd.Query;
 
 import java.util.List;
-
-
+import static service.OfyService.ofy;
+import static logic.BookSearch.searchBook;
 import javax.inject.Named;
 
 @Api(name = "bookapi", version = "v1", scopes = { Constants.EMAIL_SCOPE }, clientIds = {
@@ -122,18 +122,18 @@ public class BooksApi {
 	@ApiMethod(name = "queryBooks", path = "books", httpMethod = HttpMethod.POST)
 	public List<Book> queryBooks(final BookQuery q) {
 		int limit = (q.getLimit() == 0) ? 10 : q.getLimit();
-		Query<Book> query;
-		String field = q.getField();
-		if (field == null)
+		Query<Book> query = null;
+		
+		if (q.getType() == 0)
 			query = ofy().load().type(Book.class).order("-likes")
 					.offset(q.getOffset()).limit(limit);
-		else {
-			field = field.split(" ")[0];
-			field = (""+field.charAt(0)).toUpperCase() + field.substring(1).toLowerCase();
-			query = ofy().load().type(Book.class)
-					.filter("title >=", field)
-					.filter("title <", field + "\uFFFD")
-					.offset(q.getOffset()).limit(limit);
+		else if (q.getType()==1){
+			int size = ofy().load().type(Book.class).count();
+			int random = 0;
+			if (size > limit) random = (int) (Math.random()*(size-limit));
+			query = ofy().load().type(Book.class).offset(random).limit(limit);
+		} else if (q.getType()==2) {
+			return searchBook(q.getField());
 		}
 		List<Book> books = query.list();
 		return books;

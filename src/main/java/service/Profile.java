@@ -83,7 +83,7 @@ public class Profile {
 		if (liked.size()==0) return;
 		List<Value> rate = new ArrayList<Value>();
 		for (int i=0;;i+=50){
-			List<Book> db = new BooksApi().queryBooks(new BookQuery(50, i));
+			List<Book> db = OfyService.ofy().load().type(Book.class).offset(i).limit(50).list();
 			if (db.size()==0) break;
 			List<Book> these = new ArrayList<Book>(0);
 			for (String b: liked){
