@@ -12,7 +12,7 @@ html{
     color: #ffffff;
     letter-spacing: 1px;
 }
-#exit, #add-book{
+#exit, #add-book, #profile{
     color:#ffffff;
     font-family: Jura;
     font-size: 17px;
@@ -38,4 +38,13 @@ input#search{
     outline:0;
     font-family: Jura;
     color: #ffffff;
+}
+.bottom{
+    height: 50px;
+}
+.footer{
+    width: 100%;
+    color: #ffffff;
+    background-color: #222222;
+    font-family: Jura;
 }

@@ -8,6 +8,7 @@ a:hover, a:visited, a:link, a:active{
     cursor: context-menu;
 }
 .caption{
+    margin-top: 60px;
     font-family: Jura;
     font-size: 25px;
     text-align: center;

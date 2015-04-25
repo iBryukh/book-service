@@ -11,6 +11,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/fonts.css" rel="stylesheet" />
     <link href="css/general.css" rel="stylesheet" />
+    <link href="css/main-page.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
@@ -18,6 +19,8 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/global.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/main-page.js"></script>
+    <script src="js/result.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
 
     <!--[if lt IE 9]>
@@ -27,27 +30,34 @@
 </head>
 <body>
 <nav class="navbar navbar-default navbar-static-top header">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand logotype" href="index.html">Book Service</a>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logotype" href="index.html">Book Service</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" id="profile">My Profile</a></li>
+                    <li><a href="upload.html" id="add-book">Add Book</a></li>
+                    <li><a href="#" id="exit">Sing In</a></li>
+                </ul>
+                <form class="navbar-form navbar-right" action="result.html" method="get">
+                    <input type="text" id="search" name="q" placeholder="Search...">
+                </form>
+            </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+    </nav>
+    <div class="books-container">
+        <p class="caption">Result</p>
+        <div id="books-result-grid" class="container">
             
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="upload.html" id="add-book">Add Book</a></li>
-                <li><a href="#" id="exit">Sing In</a></li>
-            </ul>
-            <form class="navbar-form navbar-right" action="result.html" method="get">
-                <input type="text" id="search" name="q" placeholder="Search...">
-            </form>
         </div>
     </div>
-</nav>
 </body>
 </html>
