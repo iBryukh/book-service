@@ -1,5 +1,7 @@
 var MOST_LIKED_BOOKS_GRID_ID = 'books-liked-grid';
 var RANDOM_BOOKDS_GRID_ID = 'random-grid';
+var LIMIT = 12;
+var BOOKS_IN_ROW = 4;
 
 function init(){
     var rootpath = "https://" + window.location.host + "/_ah/api";
@@ -7,22 +9,33 @@ function init(){
 }
 
 function load(){
-    gapi.client.bookapi.queryBooks({'limit': 20, 'type': 0}).execute(function(response){
-        generate_page(MOST_LIKED_BOOKS_GRID_ID, response['items']);
+    gapi.client.bookapi.queryBooks({'limit': LIMIT, 'type': 0}).execute(function(response){
+        generate_page(MOST_LIKED_BOOKS_GRID_ID, response.items);
     });
-    gapi.client.bookapi.queryBooks({'limit': 20, 'type': 1}).execute(function(response){
-        generate_page(RANDOM_BOOKDS_GRID_ID, response['items']);
+    gapi.client.bookapi.queryBooks({'limit': LIMIT, 'type': 1}).execute(function(response){
+        generate_page(RANDOM_BOOKDS_GRID_ID, response.items);
     });
 }
 
 function generate_page(id, booksArray) {
-    for(var i = 0; i <booksArray.length; ++i){
-    	var div = document.createElement('div');
-        div.className = 'col-md-3 one-book';
-        div.appendChild(book_cover(booksArray[i]));
-        div.appendChild(about_book(booksArray[i]));
+    var i = 0;
+    while(i < booksArray.length){
+        var div = document.createElement('div');
+        div.className = 'row';
+        for(var j = 0; j < BOOKS_IN_ROW; ++j){
+            div.appendChild(generate_book(booksArray[i++]));
+        }
         document.getElementById(id).appendChild(div);
     }
+}
+
+function generate_book(book){
+    var div = document.createElement('div');
+    div.className = 'col-md-3 one-book';
+    div.appendChild(book_cover(book));
+    div.appendChild(about_book(book));
+    
+    return div;
 }
 
 function book_cover(book){

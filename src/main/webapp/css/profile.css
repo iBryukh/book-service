@@ -1,0 +1,33 @@
+a:hover, a:visited, a:link, a:active{
+    text-decoration: none;
+}
+#userdata ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+#userdata li {
+    float: left;
+}
+hr{
+    width: 80%;
+    margin-bottom: 50px;
+}
+#userdata{
+    margin-top: 50px;
+    margin-left: 170px;
+}
+#photo{
+	max-width: 300px;
+	max-height: 300px;
+}
+li.photo{
+}
+.information{
+    font-family: Jura;
+    margin-top: 30px;
+    margin-left: 150px;
+    width: 600px;
+    font-size: 15px;
+}

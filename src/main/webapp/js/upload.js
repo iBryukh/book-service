@@ -56,7 +56,7 @@ function preview(input) {
 
 function onBookLoaded (response) {
     if(!response.code)
-        alert('success');
+        window.location.href = 'book.html?id'+response['websafeKey'];
     else
         alert('problems');
 }

@@ -5,36 +5,15 @@ var scopes = 'https://www.googleapis.com/auth/userinfo.email';
 var COOKIE_NAME = 'userdata';
 
 function writeToCookie(response){
-    var user = {};
     if(!response.code){
-        user.name = response.name;
-        user.id = response.id;
-        user.session = true;
+       response.session = true;
+       setCookie(COOKIE_NAME,JSON.stringify(response));
     }
-    
-    setCookie(COOKIE_NAME,JSON.stringify(user));
-    console.log(document.cookie);
 }
 
 function signin(mode, callback) {
     gapi.auth.authorize({client_id: client_id,scope: scopes, immediate: mode}, callback);
 }
-$(document).ready(function(){
-    $('#exit').text((document.cookie.indexOf('session') == -1)?'Sing In':'Log Out');
-    $('#exit').click(function(){
-        if(document.cookie.indexOf('session') != -1){
-            $('#exit').text('Sing In');
-            eraseCookie(COOKIE_NAME);
-        } else {
-            gapi.client.load('oauth2','v2', function() {
-                signin(false, function handleAuth() {
-                    gapi.client.oauth2.userinfo.get().execute(writeToCookie);
-                });
-            });
-            $('#exit').text('Log Out');
-        }
-    });
-});
 
 function setCookie(name, value, expires, path, domain, secure) {
     document.cookie = name + "=" + escape(value) +
@@ -68,3 +47,27 @@ function eraseCookie (name,path,domain) {
         "; expires=Thu, 01-Jan-70 00:00:01 GMT";
     }
 }
+
+$(document).ready(function(){
+    if(document.cookie.indexOf('session') != -1)
+        $('#list').prepend('<li><a href="../profile.html" id="profile">My Profile</a></li>');
+
+    $('#exit').text((document.cookie.indexOf('session') == -1)?'Sing In':'Log Out');
+    $('#exit').click(function(){
+        if(document.cookie.indexOf('session') != -1){
+
+            $('#exit').text('Sing In');
+            eraseCookie(COOKIE_NAME);
+            $('#profile').remove();
+            $('body').append('<iframe id="logoutframe" src="https://accounts.google.com/logout" style="display: none;"></iframe>');
+        } else {
+            $('#list').prepend('<li><a href="../profile.html" id="profile">My Profile</a></li>');
+            gapi.client.load('oauth2','v2', function() {
+                signin(false, function() {
+                    gapi.client.oauth2.userinfo.get().execute(writeToCookie);
+                });
+            });
+            $('#exit').text('Log Out');
+        }
+    });
+});

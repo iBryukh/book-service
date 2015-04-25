@@ -1,33 +1,6 @@
 var ID = getJsonFromUrl()['id'];
 var BOOK;
 
-$(document).ready(function(){
-	$('#submit').click(function(){
-		var comment = $('#comment-text').val();
-		if(comment.length > 0)
-			gapi.client.bookapi.commentBook({'websafeBookKey': ID, 'comment': comment}).execute(addComment);
-	});
-	$('body').on('click', '.fa-thumbs-up', function(){
-		gapi.client.bookapi.likeBook({'websafeBookKey': ID}).execute(func);
-	});
-	$('body').on('click', '.fa-thumbs-down', function(){
-		gapi.client.bookapi.dislikeBook({'websafeBookKey': ID}).execute(func);
-	});
-});
-
-function addComment(response){
-	if(response.code)
-		return;
-	comment(response);
-	$('#comment-text').text("");
-}
-
-function func(response){
-	var marks = response.message.split(',');
-	$('#like').text(marks[0]);
-	$('#dislike').text(marks[1]);
-}
-
 function init(){
 	var rootpath = "https://" + window.location.host + "/_ah/api";
     gapi.client.load('bookapi', 'v1', load, rootpath);
@@ -36,6 +9,48 @@ function init(){
 function load(){
 	gapi.client.bookapi.getBook({'websafeBookKey': ID}).execute(ex);
 	gapi.client.bookapi.getComments({'websafeBookKey': ID}).execute(comments);
+}
+
+function addComment(response){
+	if(!response.code){
+		comment(response);
+		$('#comment-text').val('');
+	} else {
+		gapi.client.load('oauth2','v2', function() {
+	       	signin(false, function() {
+				gapi.client.oauth2.userinfo.get().execute(function(response){
+					writeToCookie(response);
+					addNewComment();
+				});
+			});
+		});
+	}
+}
+
+function func(response, type){
+	if(!response.code){
+		var marks = response.message.split(',');
+		$('#like').text(marks[0]);
+		$('#dislike').text(marks[1]);
+	} else {
+		//alert('please log in and try again');
+		gapi.client.load('oauth2','v2', function() {
+	       	signin(false, function() {
+				gapi.client.oauth2.userinfo.get().execute(function(response){
+					writeToCookie(response);
+					if(type == 1){
+						gapi.client.bookapi.likeBook({'websafeBookKey': ID}).execute(function(response){
+							func(response, 1);
+						});
+					} else {
+						gapi.client.bookapi.dislikeBook({'websafeBookKey': ID}).execute(function(response){
+							func(response, 2);
+						});
+					}
+				});
+			});
+		});
+	}
 }
 
 function ex(response){
@@ -96,3 +111,25 @@ function comments(response){
 function comment(data){
 	document.getElementById('comments').innerHTML += '<div class="comment"><p class="author">'+data['authorName']+'</p><p class="content">'+data['comment']+'</p></div><hr width="30%">';
 }
+
+function addNewComment(){
+	var comment = $('#comment-text').val();
+		if(comment.length > 0)
+			gapi.client.bookapi.commentBook({'websafeBookKey': ID, 'comment': comment}).execute(addComment);
+}
+
+$(document).ready(function(){
+	$('#submit').click(function(){
+		addNewComment();
+	});
+	$('body').on('click', '.fa-thumbs-up', function(){
+		gapi.client.bookapi.likeBook({'websafeBookKey': ID}).execute(function(response){
+			func(response, 1);
+		});
+	});
+	$('body').on('click', '.fa-thumbs-down', function(){
+		gapi.client.bookapi.dislikeBook({'websafeBookKey': ID}).execute(function(response){
+			func(response, 2);
+		});
+	});
+});

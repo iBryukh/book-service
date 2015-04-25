@@ -1,13 +1,13 @@
 a:hover, a:visited, a:link, a:active{
     text-decoration: none;
 }
-ul {
+.load-form ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
-li {
+.load-form li {
     float: left;
 }
 hr{
@@ -104,6 +104,7 @@ hr{
     float: right;
     margin-right: 66px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 @media (max-width: 1219px) {

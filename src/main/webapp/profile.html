@@ -4,14 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Book Service</title>
 
     <link rel="shortcut icon" href="resources/book.png">
 
+    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/fonts.css" rel="stylesheet" />
     <link href="css/general.css" rel="stylesheet" />
     <link href="css/main-page.css" rel="stylesheet" />
+    <link href="css/profile.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
@@ -20,7 +23,7 @@
     <script src="js/global.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/main-page.js"></script>
-    <script src="js/result.js"></script>
+    <script src="js/profile.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
 
     <!--[if lt IE 9]>
@@ -29,7 +32,7 @@
     <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-default navbar-static-top header">
+    <nav class="navbar navbar-default navbar-static-top header">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -52,9 +55,20 @@
             </div>
         </div>
     </nav>
+    <div class="container" id="userdata">
+        <ul>
+            <li class="photo">
+                <img id="photo" />
+            </li>
+            <li class="information">
+                <div id="name"></div>
+                <div id="email"></div>
+            </li>
+        </ul>
+    </div>
     <div class="books-container">
-        <p class="caption"></p>
-        <div id="books-result-grid" class="container">
+        <p class="caption">Recommended For You</p>
+        <div id="books-recomended-grid" class="container">
             
         </div>
     </div>

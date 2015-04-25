@@ -7,13 +7,13 @@
 a:hover, a:visited, a:link, a:active{
     text-decoration: none;
 }
-ul {
+#about-book-container ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
-li {
+#about-book-container li {
     float: left;
 }
 
@@ -98,10 +98,12 @@ li {
     background-color: #222222;
     color: #ffffff;
     text-align: center;
-    padding-top: 4px;
     margin-left: auto;
     margin-right: auto;
-    cursor  : pointer;
+    cursor: pointer;
+    font-family: Jura;
+    padding-top: 5px;
+    font-size: 15px;
 }
 #comment-text{
     width: 70%;
