@@ -9,6 +9,7 @@ import java.util.List;
 import logic.CosineSimilarity;
 
 import com.google.appengine.api.users.User;
+import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -51,8 +52,11 @@ public class Profile {
 		return disliked;
 	}
 	
-	public List<String> getRecommended() {
-		return recommended;
+	public List<Book> getRecommended() {
+		ArrayList<Book> res = new ArrayList<>();
+		for (String b: recommended)
+			res.add((Book) OfyService.ofy().load().key(Key.create(b)).now());
+		return res;
 	}
 	
     private Profile() {}
@@ -103,13 +107,11 @@ public class Profile {
 		     }
 		});
 		recommended = new ArrayList<String>(0);
-		int i = 0;
 		for (Value b:rate) {
 			if (!recommended.contains(b.getBook().getWebsafeKey())) {
 				recommended.add(b.getBook().getWebsafeKey());
-				++i;
 			}
-			if (i > 30) return;
+			if (recommended.size() > 30 || b.getRate() < 0.3) return;
 		}
 	}
 	

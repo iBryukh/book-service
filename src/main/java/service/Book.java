@@ -117,7 +117,11 @@ public class Book {
 		try {
 			return DropboxClient.getClient().createTemporaryDirectUrl(image).url;
 		} catch (Exception e) {
-			return "";
+			try {
+				return DropboxClient.getClient().createTemporaryDirectUrl("/covers/@DEFAULT/default.jpg").url;
+			} catch (DbxException e1) {
+				return "";
+			}
 		}
 	}
 

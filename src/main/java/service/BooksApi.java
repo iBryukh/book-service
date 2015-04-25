@@ -140,7 +140,7 @@ public class BooksApi {
 	}
 	
 	@ApiMethod(name = "commentBook", path = "book/{websafeBookKey}/comment", httpMethod = HttpMethod.POST)
-	public Comment commentBook(@Named("user") final User user,
+	public Comment commentBook(final User user,
 			@Named("websafeBookKey") final String websafeBookKey, final CommentForm form) throws UnauthorizedException {
 		if (form.getComment()==null || form.getComment().length()<2) return null;
 		if (user == null) {
