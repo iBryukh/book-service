@@ -1,5 +1,5 @@
 var Q = getJsonFromUrl()['q'];
-var RESULT_BOOKS_GRID_ID = 'books-result-grid';
+var RESULT_BOOKS_GRID_ID = '#books-result-grid';
 
 function load(){
     gapi.client.bookapi.queryBooks({'type': 2, 'field': Q}).execute(function(response){

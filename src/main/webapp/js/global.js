@@ -7,3 +7,8 @@ function getJsonFromUrl() {
     });
     return result;
 }
+
+function init(){
+	var rootpath = "https://" + window.location.host + "/_ah/api";
+    gapi.client.load('bookapi', 'v1', load, rootpath);
+}

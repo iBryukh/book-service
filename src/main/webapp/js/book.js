@@ -1,14 +1,15 @@
 var ID = getJsonFromUrl()['id'];
 var BOOK;
 
-function init(){
-	var rootpath = "https://" + window.location.host + "/_ah/api";
-    gapi.client.load('bookapi', 'v1', load, rootpath);
-}	
-
 function load(){
-	gapi.client.bookapi.getBook({'websafeBookKey': ID}).execute(ex);
-	gapi.client.bookapi.getComments({'websafeBookKey': ID}).execute(comments);
+	gapi.client.bookapi.getBook({'websafeBookKey': ID}).execute(book);
+	gapi.client.bookapi.getComments({'websafeBookKey': ID}).execute(function(response){
+		if(response['items']){
+			var commentList = response['items'];
+			for(var i = 0; i < commentList.length; ++i)
+				comment(commentList[i]);
+		}
+	});
 }
 
 function addComment(response){
@@ -52,69 +53,32 @@ function func(response, type){
 	}
 }
 
-function ex(response){
+function book(response){
 	if(response.code)
 		window.location = "404.html";
-	BOOK = response;
-	generatePage();
-}
-
-function generatePage(){
-	var ul = document.createElement('ul');
-	ul.appendChild(bookCover());
-	ul.appendChild(information());
-
-	document.getElementById('about-book-container').appendChild(ul);
-}
-
-function bookCover(){
-	var li = document.createElement('li');	
-	li.className = 'book-cover';
-	li.innerHTML = '<img src="'+BOOK['image']+'" />';
-
-	return li;
-}
-
-function information(){
-	var li = document.createElement('li');	
-	li.className = 'information';
-	li.innerHTML += '<p class="author-name">'+BOOK['author']+'</p>';
-	li.innerHTML += '<p class="story-name">'+BOOK['title']+'</p>';
-    li.innerHTML += '<i class="fa fa-thumbs-up fa-2x"></i><span id="like">'+BOOK['likes']+'</span>';
-    li.innerHTML += '<i class="fa fa-thumbs-down fa-2x" style="margin-left: 15px;"></i><span id="dislike">'+BOOK['dislikes']+'</span>';
-    li.innerHTML += '<div class="annotations">'+BOOK['annotation']+'</div>';
-    if(BOOK['quotes']){
-	    var quotes = "";
-	    for(var i = 0; i < BOOK['quotes'].length; ++i){
-	    	quotes += '<div class="quote">'
-			quotes += '<p>#'+(i+1)+'</p>';
-			quotes += '<i>'+BOOK['quotes'][i]+'</i>';
-			quotes += '</div>';
-	    }
-	    li.innerHTML += '<div class="quotes">'+quotes+'</div>';
-	}
-	return li;
-}
-
-function comments(response){
-	if(response.code)
-		return;
-	if(response.items){
-		var commentList = response.items;
-		for(var i = 0; i < commentList.length; ++i){
-			comment(commentList[i]);
-		}
+	$('#cover').attr('src', response['image']);
+	$('#author-name').text(response['author']);
+	$('#story-name').text(response['title']);
+	$('#like').text(response['likes']);
+	$('#dislike').text(response['dislikes']);
+	$('#annotations').text(response['annotation']);
+	if(response['quotes']){
+	    for(var i = 0; i < response['quotes'].length; ++i)
+	    	$('#quotes').append('<div class="quote"><p>#'+(i+1)+'</p><i>'+response['quotes'][i]+'</i></div>');
+	} else {
+		$('#quotes').remove();
 	}
 }
 
 function comment(data){
-	document.getElementById('comments').innerHTML += '<div class="comment"><p class="author">'+data['authorName']+'</p><p class="content">'+data['comment']+'</p></div><hr width="30%">';
+	$('#comments').append('<div class="comment"><p class="author">'+data['authorName']+'</p><p class="content">'
+		+data['comment']+'</p></div><hr width="30%">');
 }
 
 function addNewComment(){
 	var comment = $('#comment-text').val();
-		if(comment.length > 0)
-			gapi.client.bookapi.commentBook({'websafeBookKey': ID, 'comment': comment}).execute(addComment);
+	if(comment.length > 0)
+		gapi.client.bookapi.commentBook({'websafeBookKey': ID, 'comment': comment}).execute(addComment);
 }
 
 $(document).ready(function(){

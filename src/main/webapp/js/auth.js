@@ -55,7 +55,6 @@ $(document).ready(function(){
     $('#exit').text((document.cookie.indexOf('session') == -1)?'Sing In':'Log Out');
     $('#exit').click(function(){
         if(document.cookie.indexOf('session') != -1){
-
             $('#exit').text('Sing In');
             eraseCookie(COOKIE_NAME);
             $('#profile').remove();
