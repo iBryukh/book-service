@@ -1,16 +1,18 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import logic.BookSearch;
 import logic.CosineSimilarity;
+import static logic.BookSearch.*;
 
 import com.google.appengine.api.users.User;
 import com.googlecode.objectify.Key;
-import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -84,32 +86,43 @@ public class Profile {
 	}
 	
 	private void updateRecommended(final User user){
+		recommended = new ArrayList<String>(0);
 		if (liked.size()==0) return;
 		List<Value> rate = new ArrayList<Value>();
+		CosineSimilarity coss = new CosineSimilarity();
+		List<Book> these = new ArrayList<Book>(0);
+		
+		for (String b: liked){
+			these.add(new BooksApi().getBook(user, b));
+		}
+		
 		for (int i=0;;i+=50){
 			List<Book> db = OfyService.ofy().load().type(Book.class).offset(i).limit(50).list();
 			if (db.size()==0) break;
-			List<Book> these = new ArrayList<Book>(0);
-			for (String b: liked){
-				these.add(new BooksApi().getBook(user, b));
-			}
 			for (Book b: db){
 				for (Book b2: these){
-					if (these.contains(b)) continue;
-					rate.add(new Value (b, new CosineSimilarity().Cosine_Similarity_Score(b.getAnnotation(), b2.getAnnotation())));
+					if (!these.contains(b))
+						rate.add(new Value (b, coss.Cosine_Similarity_Score(b.getAnnotation(), b2.getAnnotation())));
 				}
 			}
 		}
+		
+		for (Book a:these) {
+			List<Book> search = BookSearch.searchBook(a.getAuthor(), BookSearch.ONLY_AUTHOR);
+			for (Book b: search)
+				if (!liked.contains(b.getWebsafeKey())) rate.add(new Value (b, 1.));
+		}
+		
 		Collections.sort(rate, new Comparator<Value>() {
 			 public int compare(Value o1, Value o2) {
 		            if (o2.getRate() < o1.getRate()) return -1;
 		            return 1;
 		     }
 		});
-		recommended = new ArrayList<String>(0);
+		
 		for (Value b:rate) {
 			if (!recommended.contains(b.getBook().getWebsafeKey())) {
-				recommended.add(b.getBook().getWebsafeKey());
+				if (b.getRate() >= 0.7) recommended.add(b.getBook().getWebsafeKey());
 			}
 			if (recommended.size() > 30 || b.getRate() < 0.7) return;
 		}

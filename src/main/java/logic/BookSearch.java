@@ -9,18 +9,25 @@ import service.Book;
 import static service.OfyService.ofy;
 
 public class BookSearch {
-	public static List<Book> searchBook(String field){
+	public static final int ALL_FIELDS = 0;
+	public static final int ONLY_AUTHOR = 1;
+	
+	public static List<Book> searchBook(String query, int fields){
 		List<Book> founded = new ArrayList<Book>();
-		if (field == null) return founded;
-		field = prepareRegex(field);
-		if (field.length() < 3) return founded;
+		if (query == null) return founded;
+		query = prepareRegex(query);
+		if (query.length() < 3) return founded;
 		
 		for (int i=0;;i+=50){
 			List<Book> list = ofy().load().type(Book.class).offset(i).limit(50).list();
 			if (list.size()==0) break;
 			for (Book b: list) {
-				String[] input = {b.getTitle().toLowerCase(), b.getAuthor().toLowerCase(), b.getAnnotation().toLowerCase()};
-				Pattern p = Pattern.compile(field);
+				String[] input = null;
+				if (fields==ALL_FIELDS)
+					input = new String[] {b.getTitle().toLowerCase(), b.getAuthor().toLowerCase(), b.getAnnotation().toLowerCase(), b.getGenre().toString().toLowerCase()};
+				else
+					input = new String[] {b.getAuthor().toLowerCase()};
+				Pattern p = Pattern.compile(query);
 				for (int j = 0; j < input.length; ++j) {
 					Matcher m = p.matcher(input[j]);
 					if (m.find()) {
@@ -33,10 +40,19 @@ public class BookSearch {
 		return founded;
 	}
 	
-	private static String prepareRegex (String s) {
-		s = s.replaceAll("[^a-zA-Z0-9+]", "");
+	public static List<Book> searchBook(String query){
+		return searchBook(query, ALL_FIELDS);
+	}
+	
+	public static String prepareRegex (String s) {
+		s = s.replaceAll("[^a-zA-Z0-9+]", "+");
 		while (s.contains("++")) s = s.replace("++", "+");
-		s = s.replace('+', '|');
+		String[] a = s.split("\\+");
+		s = "";
+		for (String i: a)
+			if(i.length() > 1) s += i + '|';
+		if (s.length() < 3) return "";
+		s = s.substring(0, s.length()-1);
 		return s.toLowerCase();
 	}
 }
