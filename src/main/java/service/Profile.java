@@ -15,7 +15,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
 
-@Cache
+//@Cache
 @Entity
 public class Profile {
 	private String displayName;
@@ -111,7 +111,7 @@ public class Profile {
 			if (!recommended.contains(b.getBook().getWebsafeKey())) {
 				recommended.add(b.getBook().getWebsafeKey());
 			}
-			if (recommended.size() > 30 || b.getRate() < 0.3) return;
+			if (recommended.size() > 30 || b.getRate() < 0.7) return;
 		}
 	}
 	

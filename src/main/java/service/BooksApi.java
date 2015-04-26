@@ -63,6 +63,10 @@ public class BooksApi {
 		String userId = user.getUserId();
 		Key<Profile> key = Key.create(Profile.class, userId);
 		Profile profile = ofy().load().key(key).now();
+		if (profile==null) {
+			profile = getProfileFromUser(user);
+			ofy().save().entity(profile).now();
+		}
 		return profile;
 	}
 

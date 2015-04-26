@@ -1,11 +1,9 @@
+a:hover, a:visited, a:link, a:active{
+    text-decoration: none;
+}
 #about-book-container{
     margin-top: 80px;
     margin-bottom: 50px;
-}
-
-
-a:hover, a:visited, a:link, a:active{
-    text-decoration: none;
 }
 #about-book-container ul {
     list-style-type: none;
@@ -16,13 +14,12 @@ a:hover, a:visited, a:link, a:active{
 #about-book-container li {
     float: left;
 }
-
-#book-cover{
+.book-cover{
     width: 300px;
     height: 450px;
     margin-left: 100px;
 }
-#book-cover img{
+.book-cover img{
     width: 300px;
     height: 450px;
 }
@@ -47,10 +44,7 @@ a:hover, a:visited, a:link, a:active{
 #dislike{
     margin-left: 1px;
 }
-.fa-thumbs-up{
-    cursor: pointer;
-}
-.fa-thumbs-down{
+.fa-thumbs-up, .fa-thumbs-down{
     cursor: pointer;
 }
 #annotations{
