@@ -33,7 +33,6 @@ function func(response, type){
 		$('#like').text(marks[0]);
 		$('#dislike').text(marks[1]);
 	} else {
-		//alert('please log in and try again');
 		gapi.client.load('oauth2','v2', function() {
 	       	signin(false, function() {
 				gapi.client.oauth2.userinfo.get().execute(function(response){

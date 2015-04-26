@@ -19,6 +19,8 @@ function load(){
 
 function generate_page(id, booksArray) {
     var i = 0;
+    if(booksArray.length < 4)
+        BOOKS_IN_ROW = booksArray.length;
     while(i < booksArray.length){
         var div = document.createElement('div');
         div.className = 'row';
