@@ -13,8 +13,8 @@ function load(){
 					if(resp.recommended){
 						generate_page(RECOMENDED_BOOKS_GRID_ID, resp.recommended);
 					} else {
-						alert('error');
-						$('.books-container').remove();
+						$('.caption').text('No recommendation for You');
+						$(RECOMENDED_BOOKS_GRID_ID).remove();
 					}
 			    });
 			});
