@@ -2,16 +2,17 @@ package service;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import service.BooksApi.Message;
 
-import com.dropbox.core.DbxClient;
-import com.dropbox.core.DbxEntry;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
-import com.dropbox.core.DbxWriteMode;
+import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.GetTemporaryLinkErrorException;
+import com.dropbox.core.v2.files.WriteMode;
 import com.google.api.client.util.Base64;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.HttpMethod;
@@ -115,10 +116,10 @@ public class Book {
 	}
 	public String getImage() {
 		try {
-			return DropboxClient.getClient().createTemporaryDirectUrl(image).url;
+			return DropboxClient.getClient().files().getTemporaryLink(image).getLink();
 		} catch (Exception e) {
 			try {
-				return DropboxClient.getClient().createTemporaryDirectUrl("/covers/@DEFAULT/default.jpg").url;
+				return DropboxClient.getClient().files().getTemporaryLink("/covers/@DEFAULT/default.jpg").getLink();
 			} catch (DbxException e1) {
 				return "";
 			}
@@ -135,9 +136,10 @@ public class Book {
 		ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 		String url;
 		try {
-			DbxEntry.File uploadedFile = DropboxClient.getClient().uploadFile("/covers/" + title + "/" + fileName,
-					DbxWriteMode.add(), bytes.length, bis);
-			url = uploadedFile.path;
+			FileMetadata metadata = DropboxClient.getClient().files().uploadBuilder("/covers/" + title + "/" + fileName)
+	                .withMode(WriteMode.ADD)
+	                .uploadAndFinish(bis);
+			url = metadata.getPathDisplay();
 		} finally {
 			bis.close();
 		}
