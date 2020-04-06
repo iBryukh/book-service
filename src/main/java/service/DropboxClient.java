@@ -5,6 +5,9 @@ import java.util.Locale;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 
+/**
+ * Dropbox helper class to save books covers
+ */
 public class DropboxClient {
 
 	private static DbxClientV2 client;

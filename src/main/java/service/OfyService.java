@@ -4,7 +4,9 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 
-
+/**
+ * Objectify service
+ */
 public class OfyService {
 
     static {

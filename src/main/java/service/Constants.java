@@ -2,6 +2,9 @@ package service;
 
 import com.google.api.server.spi.Constant;
 
+/**
+ * Helper class to save some constants
+ */
 public class Constants {
   public static final String WEB_CLIENT_ID = "293348945701-eem80tf926k9ak0tpd7ktae6d158n5o2.apps.googleusercontent.com";
   public static final String ANDROID_CLIENT_ID = "replace this with your Android client ID";

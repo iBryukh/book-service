@@ -16,7 +16,9 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
-
+/**
+ * A user's profile entity
+ */
 //@Cache
 @Entity
 public class Profile {

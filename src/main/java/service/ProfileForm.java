@@ -1,5 +1,8 @@
 package service;
 
+/**
+ * Helper class to exchange data between frontend and backend
+ */
 public class ProfileForm {
     private String displayName;
 

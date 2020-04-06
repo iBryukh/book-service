@@ -3,6 +3,9 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Helper class to exchange data between frontend and backend
+ */
 public class BookForm {
 	
 	private String title;

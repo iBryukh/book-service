@@ -23,6 +23,9 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.condition.IfNotZero;
 
+/**
+ * Represents the Book entity
+ */
 @Entity
 public class Book {
 	
@@ -43,7 +46,11 @@ public class Book {
 	private int userlike;
 	
 	private Book(){}
-	
+
+	/**
+	 * Creates the book from BookForm
+	 * @param bookForm BookForm
+	 */
 	public Book(BookForm bookForm) {
 		if (bookForm.getTitle()!=null) this.title = bookForm.getTitle();
 		else this.title = "";
@@ -114,6 +121,10 @@ public class Book {
 		dislikes++;
 		if (bool) likes--;
 	}
+
+	/**
+	 * @return Url for book cover
+	 */
 	public String getImage() {
 		try {
 			return DropboxClient.getClient().files().getTemporaryLink(image).getLink();
@@ -126,6 +137,13 @@ public class Book {
 		}
 	}
 
+	/**
+	 * Saves book cover
+	 * @param image Image in Base64
+	 * @param title Title of the book
+	 * @return Url of the new cover
+	 * @throws Exception
+	 */
 	private static String saveImage(String image, String title) throws Exception {
 		String[] split = image.split(";base64,");
 		String type = split[0];

@@ -14,6 +14,9 @@ import static service.OfyService.ofy;
 import static logic.BookSearch.searchBook;
 import javax.inject.Named;
 
+/**
+ * Class that provides an API for the whole service
+ */
 @Api(name = "bookapi", version = "v1", scopes = { Constants.EMAIL_SCOPE }, clientIds = {
 		Constants.WEB_CLIENT_ID, Constants.API_EXPLORER_CLIENT_ID }, description = "Books Api")
 public class BooksApi {
@@ -22,6 +25,13 @@ public class BooksApi {
 		return email == null ? null : email.substring(0, email.indexOf("@"));
 	}
 
+	/**
+	 * Saves the profile
+	 * @param user
+	 * @param pf
+	 * @return
+	 * @throws UnauthorizedException
+	 */
 	@ApiMethod(name = "saveProfile", path = "profile", httpMethod = HttpMethod.POST)
 	public Profile saveProfile(final User user, ProfileForm pf)
 			throws UnauthorizedException {
@@ -54,6 +64,12 @@ public class BooksApi {
 		return profile;
 	}
 
+	/**
+	 * Returns the profile
+	 * @param user
+	 * @return User profile
+	 * @throws UnauthorizedException
+	 */
 	@ApiMethod(name = "getProfile", path = "profile", httpMethod = HttpMethod.GET)
 	public Profile getProfile(final User user) throws UnauthorizedException {
 		if (user == null) {

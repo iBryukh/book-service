@@ -1,5 +1,8 @@
 package service;
 
+/**
+ * Class for book queries
+ */
 public class BookQuery {
 	private String field;
 	private int type;

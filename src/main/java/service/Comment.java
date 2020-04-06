@@ -9,6 +9,9 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Parent;
 
+/**
+ * Class that represents comments entity in the project
+ */
 @Cache
 @Entity
 public class Comment {
@@ -23,7 +26,14 @@ public class Comment {
     
     
     private Comment(){}
-    
+
+    /**
+     * Creates a comment from a CommentForm
+     * @param id
+     * @param bookKey
+     * @param profileKey
+     * @param form
+     */
     public Comment (final long id, Key<Book> bookKey, Key<Profile> profileKey, final CommentForm form) {
         this.id = id;
         this.profileKey = profileKey;
